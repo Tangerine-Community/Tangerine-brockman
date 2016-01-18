@@ -12,7 +12,7 @@
 # 3. tutorTrips by workflowId
 # The union of the latter two will give a list of 
 
-require_relative 'config.rb'
+require_relative 'settings.rb'
 require_relative 'helpers/Couch'
 require_relative 'helpers/CouchIterator'
 

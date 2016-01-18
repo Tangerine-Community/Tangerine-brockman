@@ -2,5 +2,8 @@
 .Apple*
 .DS_Store
 
-config.rb
 *.log
+
+# bundler
+.bundle
+vendor

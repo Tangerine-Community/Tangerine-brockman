@@ -1,4 +1,4 @@
-require '../config.rb'
+require '../settings.rb'
 require_relative 'Couch'
 require_relative 'CouchIterator'
 

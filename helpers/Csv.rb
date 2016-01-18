@@ -18,7 +18,7 @@ class Csv
 
   # lazyish get from server
   def getResult( id )
-
+    puts id
     # try to get it from the cache
     if @cachedResults[id].nil? # if the result isn't there get new ones
 
@@ -70,9 +70,9 @@ class Csv
 
         for cell in result
 
-          key         = cell['key']
-          value       = cell['value']
-          machineName = cell['machineName'] + resultIndex.to_s
+          key         = cell['k']
+          value       = cell['v']
+          machineName = cell['m'] + resultIndex.to_s
 
           # hack for handling time
           isTimeRelated = key.match(/timestamp/) || key.match(/start_time/) || key.match(/startTime/)
@@ -128,14 +128,14 @@ class Csv
     resultIds.each { |resultId|
 
       row = []
-      
+
       result = getResult(resultId)
 
-      for cell in result  
+      for cell in result
 
-        key         = cell['key']
-        value       = cell['value']
-        machineName = cell['machineName']
+        key         = cell['k']
+        value       = cell['v']
+        machineName = cell['m']
 
         unless indexByMachineName[machineName] # Have we seen the machine name before?
           machineNames.push machineName
@@ -149,7 +149,7 @@ class Csv
 
       end
 
-      files[:body].write row.map { |value| 
+      files[:body].write row.map { |value|
         value = value.to_s if value.class != String
         result = "\""
         (0..value.length-1).each { |index|
