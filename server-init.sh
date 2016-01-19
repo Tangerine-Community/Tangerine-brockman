@@ -13,7 +13,6 @@ if [ ! -z "$which_rvm" ]; then
 else
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   curl -sSL https://get.rvm.io | bash -s stable
-  sudo usermod -a -G rvm `whoami`
   source /home/`whoami`/.rvm/scripts/rvm
 
   # set secure path options
@@ -23,7 +22,7 @@ fi
 
 ruby_version="$(ruby -e 'print RUBY_VERSION')"
 right_version="2.2.3"
-if [ $ruby_version == $right_version ]; then
+if [ "$ruby_version" == "$right_version" ]; then
   echo "ruby at correct version"
 else
   # install ruby
@@ -40,4 +39,6 @@ else
   gem install bundler
 fi
 
-sudo bundle install --path vendor/bundle
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $dir
+bundle install --path vendor/bundle
