@@ -1,6 +1,10 @@
 # brockman
 
-sudo apt-get update
+# apt-get update
+if ! $updated_recently; then
+  sudo apt-get update
+  export updated_recently=TRUE
+fi
 
 # rvm
 which_rvm=`which rvm`
@@ -33,9 +37,7 @@ if [ ! -z "$which_bundler" ]; then
   echo "bundler already installed"
 else
   sudo apt-get install bundler -y
+  gem install bundler
 fi
 
-gem install bundler
-
 sudo bundle install --path vendor/bundle
-
