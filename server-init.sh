@@ -21,13 +21,14 @@ else
 fi
 
 ruby_version="$(ruby -e 'print RUBY_VERSION')"
-right_version="2.2.3"
+right_version="2.2.0"
 if [ "$ruby_version" == "$right_version" ]; then
   echo "ruby at correct version"
 else
   # install ruby
-  rvm install ruby-2.2.3
-  rvm --default use ruby-2.2.3
+  rvm install ruby-2.2.0
+  rvm install ruby-2.2.0-dev
+  rvm --default use ruby-2.2.0
 fi
 
 # bundler
