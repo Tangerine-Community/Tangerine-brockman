@@ -30,13 +30,12 @@ else
   rvm --default use ruby-2.2.3
 fi
 
-
 # bundler
 which_bundler=`which bundler`
 if [ ! -z "$which_bundler" ]; then
   echo "bundler already installed"
 else
-  sudo apt-get install bundler -y
+  sudo apt-get install bundler libsqlite3-dev -y
   gem install bundler
 fi
 
