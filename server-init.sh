@@ -1,5 +1,7 @@
-#!/usr/bin/env bash -v
+#!/usr/bin/env bash
 # brockman
+
+set -v # set verbose
 
 # apt-get update
 if ! $updated_recently; then
@@ -8,8 +10,7 @@ if ! $updated_recently; then
 fi
 
 # rvm
-which_rvm=`which rvm`
-if [ ! -z "$which_rvm" ]; then
+if [ ! -z "`which rvm`" ]; then
   echo 'rvm already installed'
 else
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -18,23 +19,17 @@ else
 
   # set secure path options
   if sudo grep -q secure_path /etc/sudoers; then sudo sh -c "echo export rvmsudo_secure_path=1 >> /etc/profile.d/rvm_secure_path.sh" && echo Environment variable installed; fi
+  source /etc/profile
 
-fi
-
-ruby_version="$(ruby -e 'print RUBY_VERSION')"
-right_version="2.2.0"
-if [ "$ruby_version" == "$right_version" ]; then
-  echo "ruby at correct version"
-else
   # install ruby
   rvm install ruby-2.2.0
   rvm install ruby-2.2.0-dev
   rvm --default use ruby-2.2.0
+
 fi
 
 # bundler
-which_bundler=`which bundler`
-if [ ! -z "$which_bundler" ]; then
+if [ ! -z "`which bundler`" ]; then
   echo "bundler already installed"
 else
   sudo apt-get install bundler libsqlite3-dev -y
