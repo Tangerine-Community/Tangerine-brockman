@@ -1,3 +1,4 @@
+#!/usr/bin/env bash -v
 # brockman
 
 # apt-get update
